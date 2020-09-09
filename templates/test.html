@@ -1,0 +1,129 @@
+<!doctype html> 
+
+<html>
+    <head>
+        <title>测试页面</title>
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+    </head>
+
+    <body>
+        <p>hahaha</p>
+        <p id='data1'>1</p>
+        <p id='data0'>1</p>
+
+        <a href="">链接文本</a>
+        <button id="data-btn">链接文本</button>
+
+        <p>
+            <input id="numa">
+            <input id="numb">
+            <a id='count'>计算结果</a>
+            <button id="form-get-btn">表单GET提交</button>
+            <button id="form-post-btn">表单post提交</button>
+            <button id="json-get-btn">JSONGET提交</button>
+            <button id="json-post-btn">JSONpost提交</button>
+
+        </p>
+    </body>
+
+ 
+    <script type="text/javascript">
+    $(function() {
+        $("#data-btn").click(function(){
+            $.ajax({
+                url: '/api/test/', //后台路由地址
+                dataType: 'json', //指定数据格式
+                success: function(data) {         
+                    var i = 0;           
+                    $.each(data, function(){   //循环处理数据                     
+                        document.getElementById('data'+i).innerHTML = data[i].username;
+                        i++;
+                    });
+                        //console.log(con);    //可以在控制台打印一下看看，这是拼起来的标签和数据
+                        //document.getElementById('data').innerHTML = data.username                            
+                    
+                },
+                error: function(xhr, type) {
+                    alert("数据错误")
+                },
+                statusCode: {
+                    404: function() {
+                    alert("没有找到相关文件~~");
+                    }
+                }
+            });
+        });  
+
+        $("#form-get-btn").click(function(){
+            var data = {
+            "numa": 3,
+            "numb": 4
+            };
+            $.ajax({
+                type: 'GET',
+                url: '/api/addition/', //后台路由地址
+                data: data, //数据
+                dataType: 'json', //指定数据格式
+                success: function(data) {   
+                    document.getElementById('count').innerText = "total:" + data['count'];
+                },
+                        //console.log(con);    //可以在控制台打印一下看看，这是拼起来的标签和数据
+                        //document.getElementById('data').innerHTML = data.username                      
+                error: function(xhr, type) {
+                    alert("数据错误")
+                },                 
+            });
+        });
+
+        $("#form-post-btn").click(function(){
+            var data = {
+            "numa": 1,
+            "numb": 2
+            };
+            $.ajax({
+                type: 'POST',
+                url: '/api/addition/', //后台路由地址
+                data: data, //数据
+                dataType: 'json', //指定数据格式
+                success: function(data) {   
+                    document.getElementById('count').innerText = "total:" + data['count'];
+                },
+                        //console.log(con);    //可以在控制台打印一下看看，这是拼起来的标签和数据
+                        //document.getElementById('data').innerHTML = data.username                      
+                error: function(xhr, type) {
+                    alert("数据错误")
+                },                 
+            });
+        });       
+
+        $("#json-post-btn").click(function(){
+            var data = {       
+                //data: JSON.stringify({"numa": 5, "numb": 100})                      
+                "numa": 5,
+                "numb": 2
+                };
+            $.ajax({
+                type: 'POST',
+                url: '/api/addition_json/', //后台路由地址
+                data: JSON.stringify(data), // 转化为字符串
+                contentType: 'application/json; charset=UTF-8', //告诉服务器传的事json数据
+                dataType: 'json', //指定数据格式
+                success: function(data) {   
+                    document.getElementById('count').innerText = "total:" + data['count'];
+                },
+                        //console.log(con);    //可以在控制台打印一下看看，这是拼起来的标签和数据
+                        //document.getElementById('data').innerHTML = data.username                      
+                error: function() {
+                    alert("cuowu ");//状态码
+                    
+                }       
+            });
+        }); 
+
+
+    });
+    </script>
+
+</html>
+
