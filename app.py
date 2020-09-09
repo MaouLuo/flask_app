@@ -47,15 +47,24 @@ def addition_json():
     #rv = json.loads(data, encoding='utf-8')
     
     total = rv['numa'] + rv['numb']
+    print('i get a json data')
     return jsonify({'count':total})
 
-@app.route('/ip') # test ip proxy
+@app.route('/ip/') # test ip proxy
 def proxy_test():
-    return 'sucess'
+    return 'sucess'+'</br>'+'jahaha'
 
 @app.route('/aidemo/')
 def baidu_ai_demo():
     return 'baidu hi'
+
+@app.route('/temp/')
+def temperature():
+    text = ''
+    with open('./temp.log', 'r', encoding='utf-8') as f:
+        for i in f:
+            text += (i+'</br>')
+    return text
 
 if __name__ == '__main__':
     app.run(debug=True, host='127.0.0.1')
