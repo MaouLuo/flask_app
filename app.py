@@ -66,6 +66,35 @@ def temperature():
             text += (i+'</br>')
     return text
 
+@app.route('/callback/test/', methods=['POST']) # 仅用于POST请求，无法接收表单数据
+def cb_test():
+    data = json.loads(request.get_data())
+    if data['token'] == 'zhimakaimen':
+        return 'Welcome to pass the test'
+    else:
+        return 'Identity verification failed'
+
+@app.route('/formdeal/test_token/', methods=['GET', 'POST'])
+def fd_t_token():
+    if request.method == 'POST':
+        token = request.form.get('token', 0)
+        date = request.form.get('date', 0)
+
+        #if date:
+        print(date)
+        #numb = request.form.get('numb', 0)
+        if token == 'zhimakaimen':
+            return 'Welcome to pass the test'
+        else:
+            return 'Identity verification failed'
+    if request.method == 'GET':
+        date = request.args.get('date', 0)
+        #numb = request.args.get('numb', 0)
+        #total = numa + numb
+        print(date)
+        return jsonify({'count':date})
+
+
 if __name__ == '__main__':
     app.run(debug=True, host='127.0.0.1')
     

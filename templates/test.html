@@ -25,6 +25,26 @@
             <button id="json-post-btn">JSONpost提交</button>
 
         </p>
+
+       
+        <form action="/formdeal/test_token/" method="POST">
+            First name:<br>
+            <input type="text" name="firstname" value="Mickey">
+            <br>
+            Last name:<br>
+            <input type="text" name="lastname" value="Mouse">
+            <br>
+            Token:<br>
+            <input type="text" name="token" value="1234">
+            <br><br>
+            <input type="submit" value="Submit">
+        </form> 
+        
+        <form action="/formdeal/test_token/" method="GET">
+            <input name="date" type="datetime-local" value="2015-09-24T13:59:59"/>
+            <input type="submit" value="Submit">
+        </form>
+
     </body>
 
  
