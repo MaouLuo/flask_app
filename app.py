@@ -59,8 +59,7 @@ def proxy_test():
     #return 'sucess'+'</br>'+'jahaha'
 
 @app.route('/aidemo/')
-def baidu_ai_demo():
-    
+def baidu_ai_demo():    
     return 'baidu hi'
 
 @app.route('/temp/')
