@@ -2,14 +2,11 @@
 
 import os
 import json
-from flask import Flask, request, url_for, render_template, jsonify, send_file
-import tools
+from flask import Flask, request, url_for, render_template, jsonify, send_file, redirect
 # app = Flask(__name__, template_folder='./templates', static_url_path='', root_path=os.getcwd()) # 设置当前路径为默认
 app = Flask(__name__, template_folder='templates', static_url_path='') # 设置当前路径为默认
 
-def dd_msg():
-    d =  tools.Dingding()
-    d.send_text('from flask')
+
 
 @app.route('/i')
 def index():
@@ -55,11 +52,10 @@ def addition_json():
 
 @app.route('/ip/') # test ip proxy
 def proxy_test():
-    dd_msg()
-    #return 'sucess'+'</br>'+'jahaha'
+    return 'sucess'+'</br>'+'jahaha'
 
 @app.route('/aidemo/')
-def baidu_ai_demo():    
+def baidu_ai_demo():
     return 'baidu hi'
 
 @app.route('/temp/')
@@ -68,7 +64,7 @@ def temperature():
     with open('./temp.log', 'r', encoding='utf-8') as f:
         for i in f:
             text += (i+'</br>')
-    return text
+    return text 
 
 @app.route('/callback/test/', methods=['POST']) # 仅用于POST请求，无法接收表单数据
 def cb_test():
@@ -96,9 +92,8 @@ def fd_t_token():
         #numb = request.args.get('numb', 0)
         #total = numa + numb
         print(date)
+        return redirect(url_for('/test/'))
         return jsonify({'count':date})
-
-
 
 
 if __name__ == '__main__':
